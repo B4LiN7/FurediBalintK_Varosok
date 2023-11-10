@@ -24,13 +24,15 @@ public class InsertActivity extends AppCompatActivity {
         btnFelvetel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 String nev = etxtNev.getText().toString().trim();
                 String orszag = etxtOrszag.getText().toString().trim();
-                String lakossag = etxtLakossag.getText().toString().trim();
-                if (nev.isEmpty() || orszag.isEmpty() || lakossag.isEmpty()) {
+                if (nev.isEmpty() || orszag.isEmpty() || etxtLakossag.getText().toString().isEmpty()) {
                     Toast.makeText(InsertActivity.this, "Vannak üresen hagyott mezők!", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                int lakossag = Integer.parseInt(etxtLakossag.getText().toString());
+
                 if (dbHelper.addToTable(nev, orszag, lakossag)) {
                     Toast.makeText(InsertActivity.this, "Sikeres adatfelvétel", Toast.LENGTH_SHORT).show();
                 }

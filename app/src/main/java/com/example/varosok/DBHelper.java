@@ -27,7 +27,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 COL_NEV + " TEXT NOT NULL, " +
                 COL_ORSZAG + " TEXT NOT NULL, " +
-                COL_LAKOSSAG + " TEXT NOT NULL" +
+                COL_LAKOSSAG + " NUMBER NOT NULL" +
                 ");";
         sqLiteDatabase.execSQL(sql);
     }
@@ -40,7 +40,7 @@ public class DBHelper extends SQLiteOpenHelper {
         onCreate(sqLiteDatabase);
     }
 
-    public boolean addToTable(String nev, String orszag, String lakossag) {
+    public boolean addToTable(String nev, String orszag, int lakossag) {
         SQLiteDatabase database = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
