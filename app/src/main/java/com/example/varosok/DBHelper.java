@@ -2,6 +2,7 @@ package com.example.varosok;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -49,5 +50,15 @@ public class DBHelper extends SQLiteOpenHelper {
 
         long result = database.insert(TABLE_NAME, null, values);
         return result != -1;
+    }
+
+    public Cursor getTable() {
+        SQLiteDatabase database = this.getReadableDatabase();
+        return database.query(TABLE_NAME, new String[] {COL_ID, COL_NEV, COL_ORSZAG, COL_LAKOSSAG}, null, null, null, null, null);
+    }
+
+    public Cursor getTableByOrszag(String orszag) {
+        SQLiteDatabase database = this.getReadableDatabase();
+        return database.query(TABLE_NAME, new String[] {COL_ID, COL_NEV, COL_ORSZAG, COL_LAKOSSAG}, COL_ORSZAG + " = ?", new String[] {orszag}, null, null, null);
     }
 }

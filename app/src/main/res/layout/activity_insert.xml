@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".InsertActivity">
+
+    <EditText
+        android:id="@+id/editText_Insert_Nev"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Név"
+        />
+
+    <EditText
+        android:id="@+id/editText_Insert_Orszag"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editText_Insert_Nev"
+        android:hint="Ország"
+        />
+
+    <EditText
+        android:id="@+id/editText_Insert_Lakossag"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editText_Insert_Orszag"
+        android:hint="Lakosság"
+        />
+
+    <Button
+        android:id="@+id/button_Insert_Felvetel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editText_Insert_Lakossag"
+        android:text="Felvétel"
+        />
+
+    <Button
+        android:id="@+id/button_Insert_Vissza"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button_Insert_Felvetel"
+        android:text="Vissza"
+        />
+
+</RelativeLayout>

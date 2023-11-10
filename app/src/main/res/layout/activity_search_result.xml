@@ -4,29 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".SearchResultActivity">
 
-    <EditText
-        android:id="@+id/editText_Main_Orszag"
+    <TextView
+        android:id="@+id/textView_SearchResult_Eredmeny"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Ország"
+        android:scrollbars="vertical"
         />
 
     <Button
-        android:id="@+id/button_Main_Kereses"
+        android:id="@+id/button_SearchResult_Vissza"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/editText_Main_Orszag"
-        android:text="Keresés"
-        />
-
-    <Button
-        android:id="@+id/button_Main_Uj"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/button_Main_Kereses"
-        android:text="Új felvétele"
+        android:layout_alignParentBottom="true"
+        android:text="Vissza"
         />
 
 </RelativeLayout>
