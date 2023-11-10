@@ -37,7 +37,7 @@ public class SearchResultActivity extends AppCompatActivity {
     private void listEredmeny(String kereses) {
         Cursor cursor;
         if (isInteger(kereses)) {
-            cursor = dbHelper.getTableByLakossag(Integer.parseInt(kereses));
+            cursor = dbHelper.getTableByLakossag10(Integer.parseInt(kereses));
         }
         else {
             cursor = dbHelper.getTableByOrszagOrNev(kereses);

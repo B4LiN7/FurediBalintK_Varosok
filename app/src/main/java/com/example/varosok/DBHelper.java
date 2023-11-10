@@ -41,6 +41,10 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     public boolean addToTable(String nev, String orszag, int lakossag) {
+        if (isNevInTable(nev)) {
+            return false;
+        }
+
         SQLiteDatabase database = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -52,9 +56,23 @@ public class DBHelper extends SQLiteOpenHelper {
         return result != -1;
     }
 
+    public boolean isNevInTable(String nev)
+    {
+        SQLiteDatabase database = this.getReadableDatabase();
+        Cursor cursor = database.query(TABLE_NAME, new String[] {COL_ID, COL_NEV, COL_ORSZAG, COL_LAKOSSAG}, COL_NEV + " = ?", new String[] {nev}, null, null, null);
+        return cursor.getCount() != 0;
+    }
+
     public Cursor getTable() {
         SQLiteDatabase database = this.getReadableDatabase();
         return database.query(TABLE_NAME, new String[] {COL_ID, COL_NEV, COL_ORSZAG, COL_LAKOSSAG}, null, null, null, null, null);
+    }
+
+    public Cursor getTableByLakossag10(int lakossag) {
+        SQLiteDatabase database = this.getReadableDatabase();
+        int min = Math.toIntExact(Math.round(lakossag * 0.9));
+        int max = Math.toIntExact(Math.round(lakossag * 1.1));
+        return database.query(TABLE_NAME, new String[] {COL_ID, COL_NEV, COL_ORSZAG, COL_LAKOSSAG}, COL_LAKOSSAG + " BETWEEN ? AND ?", new String[] {String.valueOf(min), String.valueOf(max)}, null, null, null);
     }
 
     public Cursor getTableByLakossag(int lakossag) {
