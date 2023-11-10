@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    private EditText etxtOrszag;
+    private EditText etxtKereses;
     private Button btnKereses, btnUj;
     private DBHelper  dbHelper;
 
@@ -26,15 +26,15 @@ public class MainActivity extends AppCompatActivity {
         btnKereses.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String orszag = etxtOrszag.getText().toString().trim();
-                if (orszag.isEmpty()) {
-                    Toast.makeText(MainActivity.this, "Kötelező országot megadni", Toast.LENGTH_SHORT).show();
+                String kereses = etxtKereses.getText().toString().trim();
+                if (kereses.isEmpty()) {
+                    Toast.makeText(MainActivity.this, "Kötelező keresendő szót megadni", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
                 SharedPreferences sharedPreferences = getSharedPreferences("Data", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("orszag", orszag);
+                editor.putString("kereses", kereses);
                 editor.apply();
 
                 startActivity(new Intent(MainActivity.this, SearchResultActivity.class));
@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void init() {
-        etxtOrszag = findViewById(R.id.editText_Main_Orszag);
+        etxtKereses = findViewById(R.id.editText_Main_Kereses);
         btnKereses = findViewById(R.id.button_Main_Kereses);
         btnUj = findViewById(R.id.button_Main_Uj);
         dbHelper = new DBHelper(this);

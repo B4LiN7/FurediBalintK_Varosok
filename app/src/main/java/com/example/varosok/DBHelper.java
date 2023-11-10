@@ -57,6 +57,16 @@ public class DBHelper extends SQLiteOpenHelper {
         return database.query(TABLE_NAME, new String[] {COL_ID, COL_NEV, COL_ORSZAG, COL_LAKOSSAG}, null, null, null, null, null);
     }
 
+    public Cursor getTableByLakossag(int lakossag) {
+        SQLiteDatabase database = this.getReadableDatabase();
+        return database.query(TABLE_NAME, new String[] {COL_ID, COL_NEV, COL_ORSZAG, COL_LAKOSSAG}, COL_LAKOSSAG + " = ?", new String[] {String.valueOf(lakossag)}, null, null, null);
+    }
+
+    public Cursor getTableByOrszagOrNev(String any) {
+        SQLiteDatabase database = this.getReadableDatabase();
+        return database.query(TABLE_NAME, new String[] {COL_ID, COL_NEV, COL_ORSZAG, COL_LAKOSSAG}, COL_NEV + " LIKE ? OR " + COL_ORSZAG + " LIKE ?", new String[] {"%" + any + "%", "%" + any + "%"}, null, null, null);
+    }
+
     public Cursor getTableByOrszag(String orszag) {
         SQLiteDatabase database = this.getReadableDatabase();
         return database.query(TABLE_NAME, new String[] {COL_ID, COL_NEV, COL_ORSZAG, COL_LAKOSSAG}, COL_ORSZAG + " = ?", new String[] {orszag}, null, null, null);

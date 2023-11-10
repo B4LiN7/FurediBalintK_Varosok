@@ -34,23 +34,43 @@ public class SearchResultActivity extends AppCompatActivity {
         });
     }
 
-    private void listEredmeny(String orszag) {
-        Cursor cursor = dbHelper.getTableByOrszag(orszag);
+    private void listEredmeny(String kereses) {
+        Cursor cursor;
+        if (isInteger(kereses)) {
+            cursor = dbHelper.getTableByLakossag(Integer.parseInt(kereses));
+        }
+        else {
+            cursor = dbHelper.getTableByOrszagOrNev(kereses);
+        }
+
         if (null == cursor) {
             txtEredmeny.setText("Hiba történt az adatbázis elérése közben!");
             return;
         }
         if (cursor.getCount() == 0) {
-            txtEredmeny.setText("Nem található rekord a következő adattal: " + orszag);
+            txtEredmeny.setText("Nem található rekord a következő adattal: " + kereses);
             return;
         }
 
         StringBuilder sb = new StringBuilder();
         while (cursor.moveToNext()) {
-            sb.append(cursor.getString(1)).append("\n");
+            sb.append("[")
+                    .append(cursor.getString(0)).append("] Ország: ")
+                    .append(cursor.getString(2)).append(", Város: ")
+                    .append(cursor.getString(1)).append(", Lakosok: ")
+                    .append(cursor.getInt(3)).append("\n");
         }
 
         txtEredmeny.setText(sb.toString());
+    }
+
+    private boolean isInteger(String s) {
+        try {
+            Integer.parseInt(s);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 
     private void init() {
@@ -62,7 +82,7 @@ public class SearchResultActivity extends AppCompatActivity {
 
         sharedPreferences = getSharedPreferences("Data", MODE_PRIVATE);
         editor = sharedPreferences.edit();
-        String orszag = sharedPreferences.getString("orszag", "");
-        listEredmeny(orszag);
+        String kereses = sharedPreferences.getString("kereses", "");
+        listEredmeny(kereses);
     }
 }
